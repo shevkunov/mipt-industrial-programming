@@ -1,0 +1,51 @@
+{% extends "list/base.html" %}
+
+{% block title %}
+    <table>
+        <tr>
+            <td>
+                <b>Todo list</b>
+            </td>
+        </tr>
+	    <tr>
+	        <td>
+	            <a href="{% url 'list:create_task' %}">
+                    Add new task
+                </a>
+            </td>
+	    </tr>
+    </table>
+{% endblock %}
+
+
+{% block content %}
+    {% for task in task_list %}
+        <table>
+            <tr>
+                <td>
+                    <font size=5pt>
+                        <a href="{% url 'list:edit_task' pk=task.id %}">
+                        <font color="black">
+                        {% if task.was_completed  %}
+                            {{ task.title }} (Completed)
+                        {% else %}
+                            ToDo: {{ task.title }}
+                        {% endif %}
+                        </font>     
+                        </a>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ task.description }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Created: {{ task.creation_time }}
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

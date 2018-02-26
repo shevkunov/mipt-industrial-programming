@@ -1,0 +1,32 @@
+{% extends "list/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}
+    <table>
+    <tr><td colspan=2 align="left"><b>Add new task</b></td></tr>
+        <tr>
+            <td><a href="{% url 'list:task_list' %}">Main page</a></td>
+            <td><a href="#" class="active">Add new task</a></td>
+        </tr>
+    </table>
+{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        <table>
+        {% csrf_token %}
+        {% for field in form %}
+            <tr>
+                <td>
+                    {{ field.label_tag }}
+                </td>
+                <td>
+                    {{ field | add_class:"form-control" }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+{% endblock %}

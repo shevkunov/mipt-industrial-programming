@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+    database:
+        image: postgres
+        networks:
+            - todolistnet
+        
+    webmorda:
+        image: todolistweb
+        build: ./django
+        networks:
+            - todolistnet
+        restart: always
+        
+        depends_on:
+            - database
+        ports:
+            - "8000:8000"
+
+networks:
+    todolistnet:
